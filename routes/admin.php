@@ -186,9 +186,8 @@ Route::group(['middleware' => 'isAdmin'], function(){
     Route::get('/settings', [\App\Http\Controllers\Admin\SettingController::class, 'generalSetting']);
     Route::post('/settings/update', [\App\Http\Controllers\Admin\SettingController::class, 'updateGeneralSetting']);
 
-    Route::get('/admin/google/facebook/code', [\App\Http\Controllers\Admin\SettingController::class, 'facebookGoogleForm']);
-    Route::post('/admin/google/facebook/code/store', [\App\Http\Controllers\Admin\SettingController::class, 'facebookGoogleFormStore'])->name('admin.google.facebook.code.store');
-
+    Route::get('/admin/gtm', [\App\Http\Controllers\Admin\SettingController::class, 'gtmForm']);
+    Route::post('/admin/gtm/store', [\App\Http\Controllers\Admin\SettingController::class, 'gtmStore'])->name('admin.gtm.store');
     //============== privacy pages ==================//
     Route::get('/admin/privacy/policy', [\App\Http\Controllers\Admin\SettingController::class, 'privacyPolicy']);
     Route::post('/admin/privacy/policy/store', [\App\Http\Controllers\Admin\SettingController::class, 'privacyPolicyStore'])->name('admin.privacy.policy.store');
