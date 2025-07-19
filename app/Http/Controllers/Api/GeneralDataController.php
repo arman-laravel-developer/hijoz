@@ -7,6 +7,7 @@ use App\Models\About;
 use App\Models\Category;
 use App\Models\Contact;
 use App\Models\GeneralSetting;
+use App\Models\GoogleFacebookCode;
 use App\Models\Offer;
 use App\Models\OfferProduct;
 use App\Models\Payment;
@@ -24,7 +25,7 @@ class GeneralDataController extends Controller
     {
         try {
             $settings = GeneralSetting::first();
-    
+
             if (!$settings) {
                 return response()->json([
                     'error' => true,
@@ -32,7 +33,7 @@ class GeneralDataController extends Controller
                     'generalData' => null
                 ], 404);
             }
-    
+
             return response()->json([
                 'error' => false,
                 'message' => 'Settings retrieved successfully',
@@ -51,7 +52,7 @@ class GeneralDataController extends Controller
     {
         try {
             $categories = Category::where('status', 1)->orderBy('priority', 'asc')->with('subcategories')->get();
-    
+
             if ($categories->isEmpty()) {
                 return response()->json([
                     'success' => false,
@@ -59,7 +60,7 @@ class GeneralDataController extends Controller
                     'data' => null
                 ], 404);
             }
-    
+
             return response()->json([
                 'success' => true,
                 'message' => 'Categories retrieved successfully',
@@ -78,7 +79,7 @@ class GeneralDataController extends Controller
     {
         try {
             $sliders = Setting::get();
-    
+
             if ($sliders->isEmpty()) {
                 return response()->json([
                     'success' => false,
@@ -86,7 +87,7 @@ class GeneralDataController extends Controller
                     'data' => null
                 ], 404);
             }
-    
+
             return response()->json([
                 'success' => true,
                 'message' => 'sliders retrieved successfully',
@@ -105,7 +106,7 @@ class GeneralDataController extends Controller
     {
         try {
             $offers = Offer::where('is_active', 1)->get();
-    
+
             if ($offers->isEmpty()) {
                 return response()->json([
                     'success' => false,
@@ -113,7 +114,7 @@ class GeneralDataController extends Controller
                     'data' => null
                 ], 404);
             }
-    
+
             return response()->json([
                 'success' => true,
                 'message' => 'offers retrieved successfully',
@@ -142,7 +143,7 @@ class GeneralDataController extends Controller
             }
 
             $offerProducts = OfferProduct::where('offer_id', $offer->id)->orderBy('id', 'desc')->with('product')->get();
-    
+
             if ($offerProducts->isEmpty()) {
                 return response()->json([
                     'success' => false,
@@ -170,11 +171,22 @@ class GeneralDataController extends Controller
         }
     }
 
+    public function gtm()
+    {
+        $code = GoogleFacebookCode::first();
+
+        return response()->json([
+            'gtm' => [
+                'gtm_id' => $code->gtm_id ?? null,
+            ]
+        ]);
+    }
+
     public function aboutUs ()
     {
         try {
             $aboutUs = About::first();
-    
+
             if (!$aboutUs) {
                 return response()->json([
                     'error' => true,
@@ -182,7 +194,7 @@ class GeneralDataController extends Controller
                     'data' => null
                 ], 404);
             }
-    
+
             return response()->json([
                 'error' => false,
                 'message' => 'Data retrieved successfully',
@@ -201,7 +213,7 @@ class GeneralDataController extends Controller
     {
         try {
             $privacyPolicy = PrivacyPolicy::first();
-    
+
             if (!$privacyPolicy) {
                 return response()->json([
                     'error' => true,
@@ -209,7 +221,7 @@ class GeneralDataController extends Controller
                     'data' => null
                 ], 404);
             }
-    
+
             return response()->json([
                 'error' => false,
                 'message' => 'Data retrieved successfully',
@@ -228,7 +240,7 @@ class GeneralDataController extends Controller
     {
         try {
             $termsConditions = TermsCondition::first();
-    
+
             if (!$termsConditions) {
                 return response()->json([
                     'error' => true,
@@ -236,7 +248,7 @@ class GeneralDataController extends Controller
                     'data' => null
                 ], 404);
             }
-    
+
             return response()->json([
                 'error' => false,
                 'message' => 'Data retrieved successfully',
@@ -255,7 +267,7 @@ class GeneralDataController extends Controller
     {
         try {
             $refundPolicy = RefundPolicy::first();
-    
+
             if (!$refundPolicy) {
                 return response()->json([
                     'error' => true,
@@ -263,7 +275,7 @@ class GeneralDataController extends Controller
                     'data' => null
                 ], 404);
             }
-    
+
             return response()->json([
                 'error' => false,
                 'message' => 'Data retrieved successfully',
@@ -282,7 +294,7 @@ class GeneralDataController extends Controller
     {
         try {
             $paymentPolicy = PaymentPolicy::first();
-    
+
             if (!$paymentPolicy) {
                 return response()->json([
                     'error' => true,
@@ -290,7 +302,7 @@ class GeneralDataController extends Controller
                     'data' => null
                 ], 404);
             }
-    
+
             return response()->json([
                 'error' => false,
                 'message' => 'Data retrieved successfully',
@@ -351,7 +363,7 @@ class GeneralDataController extends Controller
         try {
             $settings = GeneralSetting::first();
             $offerTime = $settings->pluck('offer_time');
-    
+
             if (!$offerTime) {
                 return response()->json([
                     'error' => true,
@@ -359,7 +371,7 @@ class GeneralDataController extends Controller
                     'data' => null
                 ], 404);
             }
-    
+
             return response()->json([
                 'error' => false,
                 'message' => 'Data retrieved successfully',

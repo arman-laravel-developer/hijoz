@@ -64,6 +64,7 @@ Route::post('/webhooks/pathao/order-status', [\App\Http\Controllers\Admin\Report
 //API for frontend...
 
 //General Data...
+Route::get('/gtm', [GeneralDataController::class, 'gtm']);
 Route::get('/general-data', [GeneralDataController::class, 'getSettings']);
 Route::get('/categories', [GeneralDataController::class, 'getCategories']);
 Route::get('/home-sliders', [GeneralDataController::class, 'getSliders']);
