@@ -1,4 +1,7 @@
-	<script src="{{ asset('backend/assets/') }}/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script src="{{ asset('backend/assets/') }}/js/bootstrap.bundle.min.js"></script>
 	<!--plugins-->
 	<script src="{{ asset('backend/assets/') }}/js/jquery.min.js"></script>
 	<script src="{{ asset('backend/assets/') }}/plugins/simplebar/js/simplebar.min.js"></script>
