@@ -203,29 +203,27 @@ class SettingController extends Controller
     }
 
 
-    public function facebookGoogleForm()
+    public function gtmForm()
     {
         $code = GoogleFacebookCode::find(1);
-        return view('admin.settings.facebook-google', compact('code'));
+        return view('admin.settings.gtm', compact('code'));
     }
 
-    public function facebookGoogleFormStore(Request $request)
+    public function gtmStore(Request $request)
     {
         $this->validate($request, [
-            'head_script' => 'required',
-            'body_script' => 'required',
+            'gtm_id' => 'required',
         ]);
 
         GoogleFacebookCode::updateOrCreate([
             'id' => 1
         ],[
-            'head_script' => $request->head_script,
-            'body_script' => $request->body_script,
+            'gtm_id' => $request->gtm_id,
         ]);
 
         return redirect()->back()->with('success', 'Code has been updtaed');
     }
-    
+
     public function generalSetting ()
     {
         $general_setting = GeneralSetting::first();

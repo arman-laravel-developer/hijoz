@@ -546,8 +546,8 @@
                 </a>
             </li>
             <li>
-                <a href="{{ url('/admin/google/facebook/code') }}">
-                    <i class="bx bx-right-arrow-alt"></i>Google & Facebook Code
+                <a href="{{ url('/admin/gtm') }}">
+                    <i class="bx bx-right-arrow-alt"></i>Google Tag manager
                 </a>
             </li>
             <li>
