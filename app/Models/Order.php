@@ -45,13 +45,23 @@ class Order extends Model
 
     public function invoiceNumber()
     {
-        $prefix = strtoupper(substr(config('app.name'), 0, 3)); // e.g. MZM from Masemart
+        $prefix = strtoupper(substr(config('app.name'), 0, 3)); // First 3 letters of APP_NAME in uppercase
 
         $orderLastId = Order::orderBy('id', 'desc')->first();
 
-        $number = $orderLastId ? $orderLastId->id + 1 : 1;
+        if (! $orderLastId) {
+            return $prefix . '0001';
+        } else {
+            $lastInvoice = $orderLastId->orderId ?? null;
 
-        return $prefix . sprintf('%04d', $number);
+            if ($lastInvoice) {
+                // Extract the numeric part from previous invoice number
+                $number = (int) filter_var($lastInvoice, FILTER_SANITIZE_NUMBER_INT);
+                return $prefix . sprintf('%04d', $number + 1);
+            }
+
+            return $prefix . '0001';
+        }
     }
 
     public function notification()
